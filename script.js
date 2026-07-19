@@ -826,13 +826,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // 13. STARK REPULSOR ARCADE COMBAT GAME ENGINE
   // --------------------------------------------------------------------------
+  
+  // --------------------------------------------------------------------------
+  // 13. STARK VECTOR CYBER RUNNER ENDLESS PHYSICS ENGINE
+  // --------------------------------------------------------------------------
   function initStarkArcade() {
     const canvas = document.getElementById('arcade-canvas');
     const startBtn = document.getElementById('start-arcade-btn');
     const overlay = document.getElementById('arcade-overlay');
     const scoreEl = document.getElementById('arcade-score');
-    const timerEl = document.getElementById('arcade-timer');
-    const accuracyEl = document.getElementById('arcade-accuracy');
+    const energyEl = document.getElementById('arcade-timer');
+    const bestEl = document.getElementById('arcade-accuracy');
     const resultTitle = document.getElementById('arcade-result-title');
     const resultSubtitle = document.getElementById('arcade-result-subtitle');
 
@@ -849,181 +853,315 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    let score = 0;
-    let timeLeft = 30;
-    let shots = 0;
-    let hits = 0;
     let isPlaying = false;
-    let timerInterval = null;
-    let targets = [];
-    let explosions = [];
+    let distance = 0;
+    let bestDistance = localStorage.getItem('stark_best_run') || 0;
+    bestEl.textContent = bestDistance + 'm';
 
-    class Target {
-      constructor() {
-        this.r = 24 + Math.random() * 12;
-        this.x = this.r + Math.random() * (width - this.r * 2);
-        this.y = this.r + Math.random() * (height - this.r * 2);
-        this.angle = 0;
-        this.color = Math.random() > 0.4 ? '#00f0ff' : '#ff0055';
-      }
+    let gameSpeed = 5.5;
+    let gravity = 0.65;
+    let frameCount = 0;
+
+    // Runner Object
+    const runner = {
+      x: 80,
+      y: height - 120,
+      w: 24,
+      h: 46,
+      vy: 0,
+      isGrounded: false,
+      isSliding: false,
+      slideTimer: 0,
+      runFrame: 0,
+
+      jump() {
+        if (this.isGrounded) {
+          this.vy = -13.5;
+          this.isGrounded = false;
+          this.isSliding = false;
+        }
+      },
+
+      slide() {
+        if (this.isGrounded && !this.isSliding) {
+          this.isSliding = true;
+          this.slideTimer = 35;
+        }
+      },
+
+      update(platforms) {
+        this.vy += gravity;
+        this.y += this.vy;
+
+        if (this.isSliding) {
+          this.slideTimer--;
+          if (this.slideTimer <= 0) {
+            this.isSliding = false;
+          }
+        }
+
+        // Platform collision
+        this.isGrounded = false;
+        const currentH = this.isSliding ? 22 : 46;
+
+        for (let p of platforms) {
+          if (
+            this.x + this.w > p.x &&
+            this.x < p.x + p.w &&
+            this.y + currentH >= p.y &&
+            this.y + currentH <= p.y + p.vy + 18
+          ) {
+            this.y = p.y - currentH;
+            this.vy = 0;
+            this.isGrounded = true;
+          }
+        }
+
+        this.runFrame += 0.25;
+      },
 
       draw() {
-        this.angle += 0.04;
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
 
-        // Outer Ring
-        ctx.beginPath();
-        ctx.arc(0, 0, this.r, 0, Math.PI * 2);
-        ctx.strokeStyle = this.color;
-        ctx.shadowColor = this.color;
+        const currentH = this.isSliding ? 22 : 46;
+
+        // Silhouette Body Shadow Glow
+        ctx.shadowColor = '#00f0ff';
         ctx.shadowBlur = 12;
-        ctx.lineWidth = 2;
-        ctx.stroke();
 
-        // Inner Crosshairs
-        ctx.beginPath();
-        ctx.moveTo(-this.r - 4, 0); ctx.lineTo(this.r + 4, 0);
-        ctx.moveTo(0, -this.r - 4); ctx.lineTo(0, this.r + 4);
-        ctx.stroke();
+        if (this.isSliding) {
+          // Sliding Silhouette
+          ctx.fillStyle = '#080d19';
+          ctx.beginPath();
+          ctx.roundRect(0, 0, 38, 22, 6);
+          ctx.fill();
+          ctx.strokeStyle = '#00f0ff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
 
-        // Core dot
-        ctx.beginPath();
-        ctx.arc(0, 0, 5, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
+          // Visor
+          ctx.fillStyle = '#00f0ff';
+          ctx.fillRect(28, 4, 8, 3);
+        } else if (!this.isGrounded) {
+          // Vaulting / Jumping Stance
+          ctx.fillStyle = '#080d19';
+          ctx.beginPath();
+          ctx.roundRect(0, 0, 24, 42, 8);
+          ctx.fill();
+          ctx.strokeStyle = '#00f0ff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Cyan Cyber Visor
+          ctx.fillStyle = '#00f0ff';
+          ctx.fillRect(14, 6, 8, 4);
+
+          // Legs tucked
+          ctx.strokeStyle = '#ff0055';
+          ctx.beginPath();
+          ctx.moveTo(6, 42); ctx.lineTo(12, 30);
+          ctx.stroke();
+        } else {
+          // Running Silhouette Gait
+          ctx.fillStyle = '#080d19';
+          ctx.beginPath();
+          ctx.roundRect(0, 0, 22, 46, 6);
+          ctx.fill();
+          ctx.strokeStyle = '#00f0ff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          // Visor
+          ctx.fillStyle = '#00f0ff';
+          ctx.fillRect(12, 6, 8, 4);
+
+          // Animated Vector Running Legs
+          const legAngle = Math.sin(this.runFrame) * 14;
+          ctx.strokeStyle = '#00f0ff';
+          ctx.lineWidth = 2.5;
+
+          ctx.beginPath();
+          ctx.moveTo(6, 36); ctx.lineTo(6 - legAngle, 46);
+          ctx.moveTo(16, 36); ctx.lineTo(16 + legAngle, 46);
+          ctx.stroke();
+        }
 
         ctx.restore();
       }
+    };
+
+    // Platforms & Obstacles
+    let platforms = [];
+    let obstacles = [];
+    let coins = [];
+
+    function initMap() {
+      platforms = [
+        { x: 0, y: height - 60, w: width + 200, vy: 0 }
+      ];
+      obstacles = [];
+      coins = [];
     }
 
-    function spawnTarget() {
-      targets = [new Target(), new Target()];
-    }
+    function spawnNextSegment() {
+      const lastP = platforms[platforms.length - 1];
+      if (lastP.x + lastP.w < width + 300) {
+        const gap = 60 + Math.random() * 90;
+        const pWidth = 300 + Math.random() * 400;
+        const pY = height - (70 + Math.random() * 80);
 
-    function createExplosion(x, y) {
-      for (let i = 0; i < 16; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const speed = 2 + Math.random() * 4;
-        explosions.push({
-          x, y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          alpha: 1,
-          color: Math.random() > 0.5 ? '#ff0055' : '#00f0ff'
-        });
+        const newP = { x: lastP.x + lastP.w + gap, y: pY, w: pWidth, vy: 0 };
+        platforms.push(newP);
+
+        // Spawn Laser Spikes or Overhead Drones
+        if (Math.random() > 0.4) {
+          const obsType = Math.random() > 0.5 ? 'laser' : 'drone';
+          obstacles.push({
+            x: newP.x + 120 + Math.random() * (pWidth - 200),
+            y: obsType === 'laser' ? pY - 28 : pY - 55,
+            w: obsType === 'laser' ? 18 : 45,
+            h: obsType === 'laser' ? 28 : 18,
+            type: obsType
+          });
+        }
       }
     }
 
     function startGame() {
-      score = 0;
-      timeLeft = 30;
-      shots = 0;
-      hits = 0;
+      distance = 0;
+      gameSpeed = 5.5;
       isPlaying = true;
+      runner.y = height - 120;
+      runner.vy = 0;
 
-      scoreEl.textContent = '00';
-      timerEl.textContent = '30';
-      accuracyEl.textContent = '100%';
-
+      initMap();
       overlay.classList.add('hidden');
-      spawnTarget();
-
-      clearInterval(timerInterval);
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        timerEl.textContent = timeLeft < 10 ? '0' + timeLeft : timeLeft;
-
-        if (timeLeft <= 0) {
-          endGame();
-        }
-      }, 1000);
     }
 
-    function endGame() {
+    function gameOver() {
       isPlaying = false;
-      clearInterval(timerInterval);
       overlay.classList.remove('hidden');
 
-      const acc = shots > 0 ? Math.round((hits / shots) * 100) : 100;
-      let rank = 'C-GRADE PILOT';
-      if (score >= 200 && acc >= 80) rank = 'S-RANK STARK AVENGER!';
-      else if (score >= 120) rank = 'A-GRADE PILOT!';
-      else if (score >= 70) rank = 'B-GRADE OPERATIVE';
-
-      resultTitle.textContent = rank;
-      resultSubtitle.textContent = `SIMULATION COMPLETE! Final Score: ${score} | Accuracy: ${acc}%`;
-      startBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> RESTART SIMULATION';
-    }
-
-    canvas.addEventListener('click', (e) => {
-      if (!isPlaying) return;
-
-      const rect = canvas.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
-
-      shots++;
-      let hitTarget = false;
-
-      for (let i = targets.length - 1; i >= 0; i--) {
-        const t = targets[i];
-        const dist = Math.hypot(clickX - t.x, clickY - t.y);
-
-        if (dist <= t.r + 5) {
-          hitTarget = true;
-          hits++;
-          score += 10;
-          scoreEl.textContent = score < 10 ? '0' + score : score;
-          createExplosion(t.x, t.y);
-          targets.splice(i, 1);
-          targets.push(new Target());
-        }
+      const finalDist = Math.floor(distance);
+      if (finalDist > bestDistance) {
+        bestDistance = finalDist;
+        localStorage.setItem('stark_best_run', bestDistance);
+        bestEl.textContent = bestDistance + 'm';
       }
 
-      const acc = Math.round((hits / shots) * 100);
-      accuracyEl.textContent = `${acc}%`;
+      resultTitle.textContent = 'STARK RUN COMPLETE!';
+      resultSubtitle.textContent = `You ran ${finalDist}m across futuristic rooftops!`;
+      startBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> RESTART RUN';
+    }
+
+    // Controls
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowUp') {
+        if (isPlaying) {
+          runner.jump();
+          e.preventDefault();
+        }
+      } else if (e.code === 'ArrowDown') {
+        if (isPlaying) {
+          runner.slide();
+          e.preventDefault();
+        }
+      }
+    });
+
+    canvas.addEventListener('click', () => {
+      if (isPlaying) {
+        runner.jump();
+      }
     });
 
     startBtn.addEventListener('click', startGame);
 
-    function renderArcade() {
+    // Main Render & Physics Loop
+    function render() {
       ctx.clearRect(0, 0, width, height);
 
       if (isPlaying) {
-        // Draw Targets
-        targets.forEach((t) => t.draw());
+        frameCount++;
+        distance += gameSpeed * 0.04;
+        gameSpeed += 0.0008; // Acceleration
 
-        // Draw Explosions
-        for (let i = explosions.length - 1; i >= 0; i--) {
-          const p = explosions[i];
-          ctx.save();
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.shadowColor = p.color;
-          ctx.shadowBlur = 8;
-          ctx.globalAlpha = p.alpha;
-          ctx.fill();
-          ctx.restore();
+        scoreEl.textContent = Math.floor(distance) + 'm';
 
-          p.x += p.vx;
-          p.y += p.vy;
-          p.alpha -= 0.03;
+        // 1. Draw Parallax Background City Skyline
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.03)';
+        for (let i = 0; i < 8; i++) {
+          const bgX = (i * 180 - (frameCount * 0.8)) % (width + 200);
+          ctx.fillRect(bgX, height - 180, 120, 180);
+        }
 
-          if (p.alpha <= 0) {
-            explosions.splice(i, 1);
+        // 2. Update & Draw Platforms
+        spawnNextSegment();
+
+        for (let i = platforms.length - 1; i >= 0; i--) {
+          const p = platforms[i];
+          p.x -= gameSpeed;
+
+          ctx.fillStyle = '#080d19';
+          ctx.fillRect(p.x, p.y, p.w, height - p.y);
+          ctx.strokeStyle = '#00f0ff';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(p.x, p.y, p.w, height - p.y);
+
+          if (p.x + p.w < -200) platforms.splice(i, 1);
+        }
+
+        // 3. Update & Draw Obstacles
+        for (let i = obstacles.length - 1; i >= 0; i--) {
+          const o = obstacles[i];
+          o.x -= gameSpeed;
+
+          if (o.type === 'laser') {
+            // Red Ground Laser Spike
+            ctx.fillStyle = '#ff0055';
+            ctx.shadowColor = '#ff0055';
+            ctx.shadowBlur = 15;
+            ctx.fillRect(o.x, o.y, o.w, o.h);
+          } else {
+            // Overhead Cyber Drone
+            ctx.fillStyle = '#a855f7';
+            ctx.shadowColor = '#a855f7';
+            ctx.shadowBlur = 15;
+            ctx.fillRect(o.x, o.y, o.w, o.h);
           }
+
+          // Collision check
+          const currentH = runner.isSliding ? 22 : 46;
+          if (
+            runner.x + runner.w > o.x &&
+            runner.x < o.x + o.w &&
+            runner.y + currentH > o.y &&
+            runner.y < o.y + o.h
+          ) {
+            gameOver();
+          }
+
+          if (o.x + o.w < -100) obstacles.splice(i, 1);
+        }
+
+        // 4. Update & Draw Runner
+        runner.update(platforms);
+        runner.draw();
+
+        // Fell into gap
+        if (runner.y > height + 50) {
+          gameOver();
         }
       }
 
-      requestAnimationFrame(renderArcade);
+      requestAnimationFrame(render);
     }
 
-    renderArcade();
+    render();
   }
 
   initStarkArcade();
+
 
 });
