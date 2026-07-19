@@ -773,12 +773,76 @@ document.addEventListener('DOMContentLoaded', () => {
       // 5. Spider-Man Crawling Spider Render
       spider.update();
       spider.draw();
+      drawWebTrail();
 
       requestAnimationFrame(renderAvengersFX);
     };
 
     renderAvengersFX();
   };
+
+  
+    // ---------------------------------------------------------
+    // E. THOR MJOLNIR CLICK THUNDER EXPLOSION
+    // ---------------------------------------------------------
+    window.addEventListener('click', (e) => {
+      const clickX = e.clientX;
+      const clickY = e.clientY;
+
+      // Spawn 8 radial lightning bolts from click point
+      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
+        const targetX = clickX + Math.cos(angle) * (100 + Math.random() * 80);
+        const targetY = clickY + Math.sin(angle) * (100 + Math.random() * 80);
+        lightningBolts.push({
+          segments: createLightningPath(clickX, clickY, targetX, targetY),
+          life: 1,
+          maxLife: 12
+        });
+      }
+      lightningFlashAlpha = 0.25;
+    });
+
+    // ---------------------------------------------------------
+    // F. SPIDER-MAN INTERACTIVE WEB CURSOR TRAIL
+    // ---------------------------------------------------------
+    const webTrail = [];
+    window.addEventListener('mousemove', (e) => {
+      webTrail.push({
+        x: e.clientX,
+        y: e.clientY,
+        alpha: 0.8,
+        life: 0
+      });
+      if (webTrail.length > 18) webTrail.shift();
+    });
+
+    const drawWebTrail = () => {
+      if (webTrail.length < 2) return;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(webTrail[0].x, webTrail[0].y);
+      for (let i = 1; i < webTrail.length; i++) {
+        ctx.lineTo(webTrail[i].x, webTrail[i].y);
+      }
+      ctx.strokeStyle = 'rgba(0, 153, 255, 0.4)';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 10;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Draw mini web cross nodes
+      for (let i = 0; i < webTrail.length; i += 3) {
+        const p = webTrail[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = '#00f0ff';
+        ctx.fill();
+      }
+      ctx.restore();
+    };
+
+    // Integrate web trail draw inside render loop
+    const originalRender = renderAvengersFX;
 
   initAvengersFX();
 

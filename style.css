@@ -2130,3 +2130,91 @@ body.cursor-hover .cursor-outline {
   z-index: -1;
   opacity: 0.85;
 }
+
+/* --------------------------------------------------------------------------
+   21. ADVANCED MARVEL ANIMATIONS (AUDIO SPECTRUM, SCANNER & HYPERDRIVE)
+   -------------------------------------------------------------------------- */
+.jarvis-audio-spectrum {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: none;
+  z-index: 900;
+  opacity: 0.85;
+}
+
+.spectrum-hud-tag {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: var(--color-cyan);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.spectrum-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 24px;
+}
+
+.spectrum-bars span {
+  width: 3px;
+  height: 20%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 8px var(--color-cyan);
+  border-radius: 2px;
+  animation: spectrumPulse 1.2s ease-in-out infinite alternate;
+}
+
+.spectrum-bars span:nth-child(2n) {
+  background: var(--color-red);
+  box-shadow: 0 0 8px var(--color-red);
+  animation-delay: 0.2s;
+}
+
+.spectrum-bars span:nth-child(3n) {
+  background: var(--color-purple);
+  box-shadow: 0 0 8px var(--color-purple);
+  animation-delay: 0.4s;
+}
+
+@keyframes spectrumPulse {
+  0% { height: 15%; }
+  100% { height: 100%; }
+}
+
+/* Card Biometric Laser Scanner Line */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-cyan), #ffffff, var(--color-cyan), transparent);
+  box-shadow: 0 0 15px var(--color-cyan);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.glass-card:hover::after {
+  opacity: 1;
+  animation: laserScan 1.6s ease-in-out infinite;
+}
+
+@keyframes laserScan {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
