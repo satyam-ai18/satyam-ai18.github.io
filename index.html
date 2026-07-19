@@ -1046,6 +1046,47 @@
       </div>
     </section>
 
+  
+    <!-- ============================================ -->
+    <!-- 14. STARK REPULSOR ARCADE MINI-GAME          -->
+    <!-- ============================================ -->
+    <section id="arcade" class="section arcade-section">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <div class="hud-badge"><i class="fa-solid fa-gamepad"></i> STARK COMBAT SIMULATOR</div>
+          <h2 class="section-title">Iron Man <span class="text-accent">Target Practice Arcade</span></h2>
+          <p class="section-subtitle">Test your repulsor aim accuracy by destroying holographic Hydra drones.</p>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="arcade-card glass-card">
+          <!-- Arcade HUD Header Bar -->
+          <div class="arcade-hud-header">
+            <div class="hud-stat"><i class="fa-solid fa-crosshairs"></i> SCORE: <span id="arcade-score">00</span></div>
+            <div class="hud-stat"><i class="fa-solid fa-stopwatch"></i> TIME: <span id="arcade-timer">30</span>s</div>
+            <div class="hud-stat"><i class="fa-solid fa-bullseye"></i> ACCURACY: <span id="arcade-accuracy">100%</span></div>
+          </div>
+
+          <!-- Arcade Combat Arena Canvas -->
+          <div class="arcade-arena">
+            <canvas id="arcade-canvas"></canvas>
+            <div id="arcade-overlay" class="arcade-overlay">
+              <div class="arcade-intro">
+                <i class="fa-solid fa-crosshairs arcade-intro-icon"></i>
+                <h3 id="arcade-result-title">STARK REPULSOR SIMULATOR</h3>
+                <p id="arcade-result-subtitle">Click on holographic targets as fast as you can in 30 seconds!</p>
+                <button id="start-arcade-btn" class="btn btn-primary btn-glow">
+                  <i class="fa-solid fa-play"></i> START COMBAT SIMULATION
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- ============================================ -->

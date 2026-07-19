@@ -822,4 +822,208 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initAvengersFX();
 
+
+  // --------------------------------------------------------------------------
+  // 13. STARK REPULSOR ARCADE COMBAT GAME ENGINE
+  // --------------------------------------------------------------------------
+  function initStarkArcade() {
+    const canvas = document.getElementById('arcade-canvas');
+    const startBtn = document.getElementById('start-arcade-btn');
+    const overlay = document.getElementById('arcade-overlay');
+    const scoreEl = document.getElementById('arcade-score');
+    const timerEl = document.getElementById('arcade-timer');
+    const accuracyEl = document.getElementById('arcade-accuracy');
+    const resultTitle = document.getElementById('arcade-result-title');
+    const resultSubtitle = document.getElementById('arcade-result-subtitle');
+
+    if (!canvas || !startBtn || !overlay) return;
+
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = canvas.parentElement.clientWidth);
+    let height = (canvas.height = canvas.parentElement.clientHeight);
+
+    window.addEventListener('resize', () => {
+      if (canvas.parentElement) {
+        width = canvas.width = canvas.parentElement.clientWidth;
+        height = canvas.height = canvas.parentElement.clientHeight;
+      }
+    });
+
+    let score = 0;
+    let timeLeft = 30;
+    let shots = 0;
+    let hits = 0;
+    let isPlaying = false;
+    let timerInterval = null;
+    let targets = [];
+    let explosions = [];
+
+    class Target {
+      constructor() {
+        this.r = 24 + Math.random() * 12;
+        this.x = this.r + Math.random() * (width - this.r * 2);
+        this.y = this.r + Math.random() * (height - this.r * 2);
+        this.angle = 0;
+        this.color = Math.random() > 0.4 ? '#00f0ff' : '#ff0055';
+      }
+
+      draw() {
+        this.angle += 0.04;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+
+        // Outer Ring
+        ctx.beginPath();
+        ctx.arc(0, 0, this.r, 0, Math.PI * 2);
+        ctx.strokeStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 12;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Inner Crosshairs
+        ctx.beginPath();
+        ctx.moveTo(-this.r - 4, 0); ctx.lineTo(this.r + 4, 0);
+        ctx.moveTo(0, -this.r - 4); ctx.lineTo(0, this.r + 4);
+        ctx.stroke();
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    function spawnTarget() {
+      targets = [new Target(), new Target()];
+    }
+
+    function createExplosion(x, y) {
+      for (let i = 0; i < 16; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 2 + Math.random() * 4;
+        explosions.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          alpha: 1,
+          color: Math.random() > 0.5 ? '#ff0055' : '#00f0ff'
+        });
+      }
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      shots = 0;
+      hits = 0;
+      isPlaying = true;
+
+      scoreEl.textContent = '00';
+      timerEl.textContent = '30';
+      accuracyEl.textContent = '100%';
+
+      overlay.classList.add('hidden');
+      spawnTarget();
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = timeLeft < 10 ? '0' + timeLeft : timeLeft;
+
+        if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      isPlaying = false;
+      clearInterval(timerInterval);
+      overlay.classList.remove('hidden');
+
+      const acc = shots > 0 ? Math.round((hits / shots) * 100) : 100;
+      let rank = 'C-GRADE PILOT';
+      if (score >= 200 && acc >= 80) rank = 'S-RANK STARK AVENGER!';
+      else if (score >= 120) rank = 'A-GRADE PILOT!';
+      else if (score >= 70) rank = 'B-GRADE OPERATIVE';
+
+      resultTitle.textContent = rank;
+      resultSubtitle.textContent = `SIMULATION COMPLETE! Final Score: ${score} | Accuracy: ${acc}%`;
+      startBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> RESTART SIMULATION';
+    }
+
+    canvas.addEventListener('click', (e) => {
+      if (!isPlaying) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      shots++;
+      let hitTarget = false;
+
+      for (let i = targets.length - 1; i >= 0; i--) {
+        const t = targets[i];
+        const dist = Math.hypot(clickX - t.x, clickY - t.y);
+
+        if (dist <= t.r + 5) {
+          hitTarget = true;
+          hits++;
+          score += 10;
+          scoreEl.textContent = score < 10 ? '0' + score : score;
+          createExplosion(t.x, t.y);
+          targets.splice(i, 1);
+          targets.push(new Target());
+        }
+      }
+
+      const acc = Math.round((hits / shots) * 100);
+      accuracyEl.textContent = `${acc}%`;
+    });
+
+    startBtn.addEventListener('click', startGame);
+
+    function renderArcade() {
+      ctx.clearRect(0, 0, width, height);
+
+      if (isPlaying) {
+        // Draw Targets
+        targets.forEach((t) => t.draw());
+
+        // Draw Explosions
+        for (let i = explosions.length - 1; i >= 0; i--) {
+          const p = explosions[i];
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.shadowColor = p.color;
+          ctx.shadowBlur = 8;
+          ctx.globalAlpha = p.alpha;
+          ctx.fill();
+          ctx.restore();
+
+          p.x += p.vx;
+          p.y += p.vy;
+          p.alpha -= 0.03;
+
+          if (p.alpha <= 0) {
+            explosions.splice(i, 1);
+          }
+        }
+      }
+
+      requestAnimationFrame(renderArcade);
+    }
+
+    renderArcade();
+  }
+
+  initStarkArcade();
+
 });
