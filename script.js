@@ -57,9 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
 
-    const colorCyan = new ThreeLib.Color('#00f0ff');
-    const colorRed = new ThreeLib.Color('#ff0055');
-    const colorPurple = new ThreeLib.Color('#7000ff');
+    const colorCyan = new ThreeLib.Color('#00f0ff');   // Thor Lightning
+    const colorRed = new ThreeLib.Color('#ff0055');    // Iron Man Arc
+    const colorPurple = new ThreeLib.Color('#a855f7'); // Black Panther Vibranium
+    const colorGreen = new ThreeLib.Color('#00ff66');  // Hulk Gamma Energy
+    const colorBlue = new ThreeLib.Color('#0099ff');   // Spider-Man Web
 
     for (let i = 0; i < particleCount * 3; i += 3) {
       positions[i] = (Math.random() - 0.5) * 20;
@@ -67,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
       positions[i + 2] = (Math.random() - 0.5) * 20;
 
       // Random color assignment
-      const mixedColor = Math.random() > 0.5 ? colorCyan : (Math.random() > 0.5 ? colorRed : colorPurple);
+      const rand = Math.random();
+      const mixedColor = rand < 0.2 ? colorCyan : (rand < 0.4 ? colorRed : (rand < 0.6 ? colorPurple : (rand < 0.8 ? colorGreen : colorBlue)));
       colors[i] = mixedColor.r;
       colors[i + 1] = mixedColor.g;
       colors[i + 2] = mixedColor.b;
