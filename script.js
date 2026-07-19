@@ -503,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ---------------------------------------------------------
-    // A. SPIDER-MAN REAL MOVING SPIDER & WEB ENGINE
+    // A. SPIDER-MAN REAL MOVING SPIDER ENGINE
     // ---------------------------------------------------------
     class Spider {
       constructor() {
@@ -515,12 +515,10 @@ document.addEventListener('DOMContentLoaded', () => {
         this.speed = 2;
         this.angle = 0;
         this.legCycle = 0;
-        this.webLength = this.y;
         this.pickNewTarget();
       }
 
       pickNewTarget() {
-        // Crawls along background margins
         const side = Math.random() > 0.5 ? 'right' : 'left';
         this.targetX = side === 'right' ? width * (0.82 + Math.random() * 0.12) : width * (0.05 + Math.random() * 0.12);
         this.targetY = height * (0.15 + Math.random() * 0.7);
@@ -553,12 +551,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.stroke();
         ctx.restore();
 
-        // Draw Spider Body & Legs
+        // Draw Spider Body & 8 Jointed Legs
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle + Math.PI / 2);
 
-        // Legs (4 on left, 4 on right)
         ctx.strokeStyle = '#ff0044';
         ctx.shadowColor = '#ff0044';
         ctx.shadowBlur = 8;
@@ -570,11 +567,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const swing = Math.sin(this.legCycle + i) * 6;
             ctx.beginPath();
             ctx.moveTo(side * 4, legOffset);
-            // Joint 1
             const jx = side * (12 + Math.abs(legOffset));
             const jy = legOffset + swing;
             ctx.lineTo(jx, jy);
-            // Tip
             const tx = side * (20 + Math.abs(legOffset));
             const ty = legOffset + swing * 1.5 + (i > 1 ? 8 : -8);
             ctx.lineTo(tx, ty);
@@ -582,7 +577,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // Abdomen & Cephalothorax
+        // Body
         ctx.beginPath();
         ctx.ellipse(0, 5, 6, 9, 0, 0, Math.PI * 2);
         ctx.fillStyle = '#110206';
@@ -597,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = '#ff0044';
         ctx.fill();
 
-        // Spider Eyes (Cyan Glowing)
+        // Glowing Eyes
         ctx.fillStyle = '#00f0ff';
         ctx.shadowColor = '#00f0ff';
         ctx.shadowBlur = 6;
@@ -616,16 +611,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let lightningBolts = [];
     let lightningFlashAlpha = 0;
 
-    const triggerThorLightning = (startX = null) => {
-      const sx = startX !== null ? startX : Math.random() * width;
-      lightningBolts.push({
-        segments: createLightningPath(sx, 0, sx + (Math.random() - 0.5) * 300, height * 0.8),
-        life: 1,
-        maxLife: 15
-      });
-      lightningFlashAlpha = 0.18;
-    };
-
     function createLightningPath(x1, y1, x2, y2) {
       let segments = [{ x1, y1, x2, y2 }];
       let displacement = 80;
@@ -637,7 +622,6 @@ document.addEventListener('DOMContentLoaded', () => {
           let midY = (seg.y1 + seg.y2) / 2 + (Math.random() - 0.5) * displacement;
           newSegments.push({ x1: seg.x1, y1: seg.y1, x2: midX, y2: midY });
           newSegments.push({ x1: midX, y1: midY, x2: seg.x2, y2: seg.y2 });
-          // Branching
           if (Math.random() < 0.3) {
             let branchX = midX + (Math.random() - 0.5) * displacement * 1.5;
             let branchY = midY + Math.random() * displacement;
@@ -650,56 +634,112 @@ document.addEventListener('DOMContentLoaded', () => {
       return segments;
     }
 
-    // Trigger Thor Lightning every 5 seconds & on scroll speed
+    const triggerThorLightning = (startX = null) => {
+      const sx = startX !== null ? startX : Math.random() * width;
+      lightningBolts.push({
+        segments: createLightningPath(sx, 0, sx + (Math.random() - 0.5) * 300, height * 0.8),
+        life: 1,
+        maxLife: 15
+      });
+      lightningFlashAlpha = 0.18;
+    };
+
     setInterval(() => {
       if (Math.random() > 0.3) triggerThorLightning();
     }, 5000);
 
+    // THOR MJOLNIR CLICK EXPLOSION (Correct Scope)
+    window.addEventListener('click', (e) => {
+      const clickX = e.clientX;
+      const clickY = e.clientY;
+      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
+        const targetX = clickX + Math.cos(angle) * (100 + Math.random() * 80);
+        const targetY = clickY + Math.sin(angle) * (100 + Math.random() * 80);
+        lightningBolts.push({
+          segments: createLightningPath(clickX, clickY, targetX, targetY),
+          life: 1,
+          maxLife: 12
+        });
+      }
+      lightningFlashAlpha = 0.25;
+    });
+
     // ---------------------------------------------------------
-    // C. HULK GAMMA SHOCKWAVES & IRON MAN BEAMS
+    // C. SPIDER-MAN INTERACTIVE WEB CURSOR TRAIL ENGINE
+    // ---------------------------------------------------------
+    const webTrail = [];
+    window.addEventListener('mousemove', (e) => {
+      webTrail.push({
+        x: e.clientX,
+        y: e.clientY,
+        alpha: 0.8
+      });
+      if (webTrail.length > 18) webTrail.shift();
+    });
+
+    const drawWebTrail = () => {
+      if (webTrail.length < 2) return;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(webTrail[0].x, webTrail[0].y);
+      for (let i = 1; i < webTrail.length; i++) {
+        ctx.lineTo(webTrail[i].x, webTrail[i].y);
+      }
+      ctx.strokeStyle = 'rgba(0, 153, 255, 0.4)';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 10;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      for (let i = 0; i < webTrail.length; i += 3) {
+        const p = webTrail[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = '#00f0ff';
+        ctx.fill();
+      }
+      ctx.restore();
+    };
+
+    // ---------------------------------------------------------
+    // D. HULK GAMMA SHOCKWAVES & IRON MAN BEAMS
     // ---------------------------------------------------------
     let gammaShockwaves = [];
     let repulsorBeams = [];
 
-    const triggerHulkGamma = () => {
+    setInterval(() => {
       gammaShockwaves.push({
         x: Math.random() * width,
         y: Math.random() * height,
         radius: 10,
-        maxRadius: 180,
         alpha: 0.6
       });
-    };
+    }, 4000);
 
-    setInterval(triggerHulkGamma, 4000);
-
-    const triggerIronManBeam = () => {
+    setInterval(() => {
       repulsorBeams.push({
         x: Math.random() * width,
         y: Math.random() * height,
         targetR: 35,
         r: 5,
-        alpha: 0.7,
-        beamLen: 0
+        alpha: 0.7
       });
-    };
-
-    setInterval(triggerIronManBeam, 3500);
+    }, 3500);
 
     // ---------------------------------------------------------
-    // D. MAIN AVENGERS ANIMATION RENDER LOOP
+    // E. MAIN RENDER LOOP
     // ---------------------------------------------------------
     const renderAvengersFX = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Thor Background Lightning Flash Overlay
+      // 1. Thor Background Lightning Flash
       if (lightningFlashAlpha > 0) {
         ctx.fillStyle = `rgba(0, 240, 255, ${lightningFlashAlpha})`;
         ctx.fillRect(0, 0, width, height);
         lightningFlashAlpha *= 0.88;
       }
 
-      // 2. Thor Lightning Bolts Draw
+      // 2. Thor Lightning Bolts
       for (let i = lightningBolts.length - 1; i >= 0; i--) {
         const bolt = lightningBolts[i];
         ctx.save();
@@ -722,7 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // 3. Hulk Gamma Shockwaves Draw
+      // 3. Hulk Gamma Shockwaves
       for (let i = gammaShockwaves.length - 1; i >= 0; i--) {
         const wave = gammaShockwaves[i];
         ctx.save();
@@ -742,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // 4. Iron Man Repulsor & Target Reticles Draw
+      // 4. Iron Man Repulsors & Reticles
       for (let i = repulsorBeams.length - 1; i >= 0; i--) {
         const beam = repulsorBeams[i];
         ctx.save();
@@ -754,7 +794,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // Crosshairs
         ctx.beginPath();
         ctx.moveTo(beam.x - beam.r - 5, beam.y);
         ctx.lineTo(beam.x + beam.r + 5, beam.y);
@@ -770,7 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // 5. Spider-Man Crawling Spider Render
+      // 5. Spider & Web Trail
       spider.update();
       spider.draw();
       drawWebTrail();
@@ -780,69 +819,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderAvengersFX();
   };
-
-  
-    // ---------------------------------------------------------
-    // E. THOR MJOLNIR CLICK THUNDER EXPLOSION
-    // ---------------------------------------------------------
-    window.addEventListener('click', (e) => {
-      const clickX = e.clientX;
-      const clickY = e.clientY;
-
-      // Spawn 8 radial lightning bolts from click point
-      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
-        const targetX = clickX + Math.cos(angle) * (100 + Math.random() * 80);
-        const targetY = clickY + Math.sin(angle) * (100 + Math.random() * 80);
-        lightningBolts.push({
-          segments: createLightningPath(clickX, clickY, targetX, targetY),
-          life: 1,
-          maxLife: 12
-        });
-      }
-      lightningFlashAlpha = 0.25;
-    });
-
-    // ---------------------------------------------------------
-    // F. SPIDER-MAN INTERACTIVE WEB CURSOR TRAIL
-    // ---------------------------------------------------------
-    const webTrail = [];
-    window.addEventListener('mousemove', (e) => {
-      webTrail.push({
-        x: e.clientX,
-        y: e.clientY,
-        alpha: 0.8,
-        life: 0
-      });
-      if (webTrail.length > 18) webTrail.shift();
-    });
-
-    const drawWebTrail = () => {
-      if (webTrail.length < 2) return;
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(webTrail[0].x, webTrail[0].y);
-      for (let i = 1; i < webTrail.length; i++) {
-        ctx.lineTo(webTrail[i].x, webTrail[i].y);
-      }
-      ctx.strokeStyle = 'rgba(0, 153, 255, 0.4)';
-      ctx.shadowColor = '#00f0ff';
-      ctx.shadowBlur = 10;
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-
-      // Draw mini web cross nodes
-      for (let i = 0; i < webTrail.length; i += 3) {
-        const p = webTrail[i];
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = '#00f0ff';
-        ctx.fill();
-      }
-      ctx.restore();
-    };
-
-    // Integrate web trail draw inside render loop
-    const originalRender = renderAvengersFX;
 
   initAvengersFX();
 
