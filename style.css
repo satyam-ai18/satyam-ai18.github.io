@@ -2061,3 +2061,50 @@ body.cursor-hover .cursor-outline {
     display: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   19. 3D PERSPECTIVE SCROLL ANIMATION SYSTEM
+   -------------------------------------------------------------------------- */
+.reveal-3d {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(22deg) translateY(65px) scale(0.92);
+  filter: blur(5px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-3d.active {
+  opacity: 1;
+  transform: perspective(1200px) rotateX(0deg) translateY(0px) scale(1) !important;
+  filter: blur(0px);
+}
+
+.reveal-3d-left {
+  opacity: 0;
+  transform: perspective(1200px) rotateY(-22deg) translateX(-70px) scale(0.92);
+  filter: blur(5px);
+  transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-3d-left.active {
+  opacity: 1;
+  transform: perspective(1200px) rotateY(0deg) translateX(0px) scale(1) !important;
+  filter: blur(0px);
+}
+
+.reveal-3d-right {
+  opacity: 0;
+  transform: perspective(1200px) rotateY(22deg) translateX(70px) scale(0.92);
+  filter: blur(5px);
+  transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-3d-right.active {
+  opacity: 1;
+  transform: perspective(1200px) rotateY(0deg) translateX(0px) scale(1) !important;
+  filter: blur(0px);
+}

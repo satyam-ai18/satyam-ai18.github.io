@@ -103,8 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      particleMesh.rotation.y = elapsedTime * 0.05 + mouseX;
-      particleMesh.rotation.x = elapsedTime * 0.03 + mouseY;
+      const scrollY = window.scrollY || window.pageYOffset;
+      particleMesh.rotation.y = elapsedTime * 0.05 + mouseX + scrollY * 0.0004;
+      particleMesh.rotation.x = elapsedTime * 0.03 + mouseY + scrollY * 0.0003;
+      camera.position.y = -scrollY * 0.0025;
+      camera.position.z = 5 + Math.sin(scrollY * 0.001) * 0.5;
 
       renderer.render(scene, camera);
     };
@@ -431,5 +434,55 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+
+  // --------------------------------------------------------------------------
+  // 11. 3D PERSPECTIVE SCROLL REVEAL ENGINE
+  // --------------------------------------------------------------------------
+  function init3DScrollReveal() {
+    const revealTargets = document.querySelectorAll(
+      '.section-header, .glass-card, .project-card, .service-card, .skill-category-card, .timeline-item, .certificate-card, .stat-card, .about-bio-card'
+    );
+
+    revealTargets.forEach((el, idx) => {
+      // Add staggered 3D animation class
+      if (idx % 2 === 0) {
+        el.classList.add('reveal-3d');
+      } else if (idx % 3 === 1) {
+        el.classList.add('reveal-3d-left');
+      } else {
+        el.classList.add('reveal-3d-right');
+      }
+    });
+
+    const observerOptions = {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Staggered reveal for grid items
+          const parentGrid = entry.target.parentElement;
+          if (parentGrid && (parentGrid.classList.contains('projects-grid') || 
+                             parentGrid.classList.contains('services-grid') || 
+                             parentGrid.classList.contains('skills-grid'))) {
+            const siblings = Array.from(parentGrid.children);
+            const childIdx = siblings.indexOf(entry.target);
+            setTimeout(() => {
+              entry.target.classList.add('active');
+            }, (childIdx % 3) * 110);
+          } else {
+            entry.target.classList.add('active');
+          }
+        }
+      });
+    }, observerOptions);
+
+    revealTargets.forEach((target) => scrollObserver.observe(target));
+  }
+
+  init3DScrollReveal();
 
 });
