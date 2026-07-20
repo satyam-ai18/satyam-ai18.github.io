@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Satyam Maurya - Resume</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      line-height: 1.45;
+      font-size: 10pt;
+    }
+    .resume-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    /* Header */
+    .header {
+      border-bottom: 2px solid #00f0ff;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .name {
+      font-size: 22pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      margin-bottom: 3px;
+    }
+    .title-sub {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #0284c7;
+      margin-bottom: 6px;
+    }
+    .contact-info {
+      font-size: 8.5pt;
+      color: #475569;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .contact-info span {
+      display: inline-flex;
+      align-items: center;
+    }
+    .contact-info a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #0f172a;
+      border-bottom: 1.5px solid #cbd5e1;
+      padding-bottom: 3px;
+      margin-bottom: 7px;
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 9.5pt;
+      color: #334155;
+      text-align: justify;
+    }
+
+    /* Skills Grid */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .skills-table td {
+      padding: 3px 0;
+      vertical-align: top;
+      font-size: 9pt;
+    }
+    .skill-cat {
+      font-weight: 700;
+      color: #0f172a;
+      width: 175px;
+    }
+    .skill-vals {
+      color: #334155;
+    }
+
+    /* Items (Projects, Exp, Edu) */
+    .item {
+      margin-bottom: 8px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .item-title {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .item-subtitle {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #0284c7;
+    }
+    .item-date {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .item-desc {
+      font-size: 9pt;
+      color: #334155;
+      margin-bottom: 3px;
+    }
+    ul.item-bullets {
+      padding-left: 16px;
+      margin-top: 2px;
+    }
+    ul.item-bullets li {
+      font-size: 8.8pt;
+      color: #334155;
+      margin-bottom: 2px;
+    }
+
+    /* Two Column Grid for Bottom */
+    .two-col {
+      display: flex;
+      gap: 20px;
+    }
+    .col {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-container">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="name">Satyam Maurya</h1>
+      <div class="title-sub">AI App Developer | Full Stack Developer</div>
+      <div class="contact-info">
+        <span>📍 India</span>
+        <span>✉️ <a href="mailto:aaryasam94@gmail.com">aaryasam94@gmail.com</a></span>
+        <span>🌐 <a href="https://satyam-ai18.github.io">satyam-ai18.github.io</a></span>
+        <span>💻 <a href="https://github.com/satyam-ai18">github.com/satyam-ai18</a></span>
+        <span>🔗 <a href="https://linkedin.com/in/satyam-maurya-77a269367">LinkedIn Profile</a></span>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section class="section">
+      <h2 class="section-title">Professional Summary</h2>
+      <p class="summary-text">
+        Innovative and detail-oriented AI App Developer and Full Stack Developer with a strong foundation in artificial intelligence, machine learning, and modern web technologies. Skilled in designing, developing, and deploying intelligent applications that integrate AI models with scalable full-stack architectures. Passionate about building impactful digital solutions through continuous learning, experimentation, and problem-solving.
+      </p>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="section">
+      <h2 class="section-title">Technical Skills</h2>
+      <table class="skills-table">
+        <tr>
+          <td class="skill-cat">Programming Languages:</td>
+          <td class="skill-vals">Python, JavaScript, TypeScript, C++, Java, Dart</td>
+        </tr>
+        <tr>
+          <td class="skill-cat">Frontend Development:</td>
+          <td class="skill-vals">React.js, Next.js, HTML5, CSS3, Tailwind CSS, Redux, Three.js</td>
+        </tr>
+        <tr>
+          <td class="skill-cat">Backend & APIs:</td>
+          <td class="skill-vals">Node.js, Express.js, Django, Flask, RESTful APIs, WebSockets</td>
+        </tr>
+        <tr>
+          <td class="skill-cat">Databases:</td>
+          <td class="skill-vals">MongoDB, MySQL, PostgreSQL, Firebase Realtime Database</td>
+        </tr>
+        <tr>
+          <td class="skill-cat">AI, ML & Data Tools:</td>
+          <td class="skill-vals">TensorFlow, PyTorch, OpenAI API, Gemini API, LangChain, Hugging Face, Scikit-learn, Pandas, NumPy, Power BI</td>
+        </tr>
+        <tr>
+          <td class="skill-cat">DevOps & Cloud:</td>
+          <td class="skill-vals">Git, GitHub, Docker, Vercel, Netlify, GitHub Pages</td>
+        </tr>
+        <tr>
+          <td class="skill-cat">Design & Developer Tools:</td>
+          <td class="skill-vals">VS Code, Postman, Figma, Canva, Power BI Desktop</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Projects -->
+    <section class="section">
+      <h2 class="section-title">Featured Projects</h2>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">AI Tech Portfolio Website</span>
+          <span class="item-date">2026</span>
+        </div>
+        <div class="item-desc">A futuristic 3D Marvel Stark Industrial & JARVIS HUD inspired web portfolio showcasing AI & Full-Stack engineering capabilities.</div>
+        <ul class="item-bullets">
+          <li>Built with HTML5, CSS3, Vanilla JavaScript, and Three.js 3D WebGL particle engine with zero heavy frameworks.</li>
+          <li>Integrated JARVIS audio spectrum effects, 3D tilt interactions, and GitHub telemetry API integration.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">AI Chat & Conversational Application</span>
+          <span class="item-date">2025</span>
+        </div>
+        <div class="item-desc">An intelligent chat platform powered by natural language processing and generative AI models.</div>
+        <ul class="item-bullets">
+          <li>Developed using React.js, Node.js, Express.js, and Socket.io for real-time bi-directional messaging.</li>
+          <li>Integrated GPT/Gemini AI APIs for dynamic responses, prompt memory, and streaming code generation.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">VisionAI Scanner & Intelligence App</span>
+          <span class="item-date">2025</span>
+        </div>
+        <div class="item-desc">Cross-platform mobile application performing computer vision tasks and text extraction.</div>
+        <ul class="item-bullets">
+          <li>Engineered with Flutter & Dart for 60fps performance on Android & iOS devices.</li>
+          <li>Integrated OpenAI Vision API for real-time image recognition, object detection, and caption synthesis.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <div class="two-col">
+      <div class="col">
+        <section class="section">
+          <h2 class="section-title">Experience</h2>
+          <div class="item">
+            <div class="item-header">
+              <span class="item-title">AI & Full Stack Developer</span>
+              <span class="item-date">2021 – Present</span>
+            </div>
+            <div class="item-subtitle">Independent Projects | Remote</div>
+            <ul class="item-bullets">
+              <li>Designed & deployed AI-driven web and mobile applications from concept to production.</li>
+              <li>Implemented ML models and custom API integrations for real-world automation tasks.</li>
+              <li>Contributed to open-source software and maintained active GitHub repositories.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="section">
+          <h2 class="section-title">Education</h2>
+          <div class="item">
+            <div class="item-header">
+              <span class="item-title">Bachelor of Computer Applications (BCA)</span>
+              <span class="item-date">2024 – 2027</span>
+            </div>
+            <div class="item-subtitle">Computer Applications & Software Dev</div>
+            <div class="item-desc">Specializing in AI Systems, Mobile Architectures, and Database Systems.</div>
+          </div>
+          <div class="item">
+            <div class="item-header">
+              <span class="item-title">Higher Secondary Education (12th)</span>
+              <span class="item-date">2022 – 2024</span>
+            </div>
+            <div class="item-subtitle">Physics, Chemistry & Mathematics (PCM)</div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Soft Skills & Achievements -->
+    <div class="two-col" style="margin-top: 4px;">
+      <div class="col">
+        <section class="section">
+          <h2 class="section-title">Key Achievements</h2>
+          <ul class="item-bullets">
+            <li>Independently built and deployed multiple production-ready AI applications.</li>
+            <li>Maintained a continuous open-source contribution record on GitHub (@satyam-ai18).</li>
+            <li>Recognized for innovative UI/UX design and fast full-stack prototyping.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="col">
+        <section class="section">
+          <h2 class="section-title">Soft Skills & Languages</h2>
+          <div class="item-desc"><strong>Soft Skills:</strong> Analytical Thinking, Problem Solving, Creativity & Innovation, Time Management, Collaboration, Adaptability.</div>
+          <div class="item-desc"><strong>Languages:</strong> English (Fluent), Hindi (Native).</div>
+        </section>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

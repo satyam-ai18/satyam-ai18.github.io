@@ -117,6 +117,9 @@
       </nav>
 
       <div class="nav-actions">
+        <button id="cv-modal-open-nav" class="hud-cv-nav-btn open-cv-modal-trigger" title="View & Download CV">
+          <i class="fa-solid fa-file-pdf"></i> <span>CV / RESUME</span>
+        </button>
         <button id="mobile-toggle" class="mobile-toggle-btn" aria-label="Toggle Menu">
           <span class="bar"></span>
           <span class="bar"></span>
@@ -173,9 +176,12 @@
             <a href="#projects" class="btn btn-primary btn-ripple">
               <span>EXPLORE PROJECTS</span> <i class="fa-solid fa-chevron-right"></i>
             </a>
-            <a href="#contact" class="btn btn-secondary btn-ripple">
-              <span>INITIATE CONTACT</span> <i class="fa-solid fa-paper-plane"></i>
+            <a href="assets/Satyam_Maurya_Resume.pdf" download="Satyam_Maurya_Resume.pdf" class="btn btn-secondary btn-ripple" title="Download Official CV PDF">
+              <i class="fa-solid fa-download"></i> <span>DOWNLOAD CV</span>
             </a>
+            <button class="btn btn-outline btn-ripple open-cv-modal-trigger" title="View Interactive CV">
+              <i class="fa-solid fa-eye"></i> <span>VIEW CV</span>
+            </button>
           </div>
 
           <!-- Social Icons -->
@@ -275,6 +281,28 @@
                 </div>
               </div>
             </div>
+
+            <!-- Smart CV Download & Preview Box -->
+            <div class="cv-quick-card glass-card">
+              <div class="cv-card-content">
+                <div class="cv-card-left">
+                  <div class="cv-card-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                  <div class="cv-card-text">
+                    <h4>Official Curriculum Vitae (CV)</h4>
+                    <p>Verified technical resume with complete AI & Full-Stack credentials.</p>
+                  </div>
+                </div>
+                <div class="cv-card-actions">
+                  <a href="assets/Satyam_Maurya_Resume.pdf" download="Satyam_Maurya_Resume.pdf" class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-download"></i> Download PDF
+                  </a>
+                  <button class="btn btn-sm btn-outline open-cv-modal-trigger">
+                    <i class="fa-solid fa-eye"></i> View CV
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- Right Dossier Specs Grid -->
@@ -1096,7 +1124,27 @@
     </div>
   </div>
 
-  </footer>
+  <!-- ============================================ -->
+  <!-- 14. STARK HUD CV PREVIEW & DOWNLOAD MODAL    -->
+  <!-- ============================================ -->
+  <div id="cv-modal" class="cv-modal-overlay">
+    <div class="cv-modal-container glass-card">
+      <div class="cv-modal-header">
+        <div class="cv-modal-title">
+          <i class="fa-solid fa-file-pdf text-accent"></i> STARK HUD // SATYAM MAURYA CV INTERFACE
+        </div>
+        <div class="cv-modal-actions">
+          <a href="assets/Satyam_Maurya_Resume.pdf" download="Satyam_Maurya_Resume.pdf" class="btn btn-xs btn-primary">
+            <i class="fa-solid fa-download"></i> Download PDF
+          </a>
+          <button id="cv-modal-close-btn" class="cv-modal-close" aria-label="Close CV Modal">&times;</button>
+        </div>
+      </div>
+      <div class="cv-modal-body">
+        <iframe src="assets/resume-template.html" class="cv-iframe" title="Satyam Maurya CV Preview"></iframe>
+      </div>
+    </div>
+  </div>
 
   <!-- Main JavaScript File -->
   <script src="script.js"></script>
