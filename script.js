@@ -835,42 +835,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initAvengersFX();
 
 
-  // --------------------------------------------------------------------------
-  // 14. STARK HUD CV PREVIEW MODAL ENGINE
-  // --------------------------------------------------------------------------
-  const cvModal = document.getElementById('cv-modal');
-  const cvModalCloseBtn = document.getElementById('cv-modal-close-btn');
-  const openCvTriggers = document.querySelectorAll('.open-cv-modal-trigger');
-
-  if (cvModal) {
-    openCvTriggers.forEach((trigger) => {
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        cvModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    if (cvModalCloseBtn) {
-      cvModalCloseBtn.addEventListener('click', () => {
-        cvModal.classList.remove('open');
-        document.body.style.overflow = 'auto';
-      });
-    }
-
-    cvModal.addEventListener('click', (e) => {
-      if (e.target === cvModal) {
-        cvModal.classList.remove('open');
-        document.body.style.overflow = 'auto';
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && cvModal.classList.contains('open')) {
-        cvModal.classList.remove('open');
-        document.body.style.overflow = 'auto';
-      }
-    });
-  }
-
 });
