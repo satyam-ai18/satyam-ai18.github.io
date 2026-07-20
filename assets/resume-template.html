@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Satyam Maurya - Resume</title>
+  <title>Satyam Maurya - Curriculum Vitae</title>
   <style>
     @page {
       size: A4;
@@ -18,7 +18,7 @@
       color: #1e293b;
       background: #ffffff;
       line-height: 1.45;
-      font-size: 10pt;
+      font-size: 9.8pt;
     }
     .resume-container {
       max-width: 800px;
@@ -39,10 +39,10 @@
       margin-bottom: 3px;
     }
     .title-sub {
-      font-size: 11pt;
+      font-size: 10.5pt;
       font-weight: 700;
       color: #0284c7;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .contact-info {
       font-size: 8.5pt;
@@ -76,29 +76,29 @@
       margin-bottom: 7px;
     }
 
-    /* Summary */
+    /* Summary & Objective */
     .summary-text {
-      font-size: 9.5pt;
+      font-size: 9.2pt;
       color: #334155;
       text-align: justify;
+      line-height: 1.4;
     }
 
     /* Skills Grid */
-    .skills-table {
-      width: 100%;
-      border-collapse: collapse;
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px 20px;
     }
-    .skills-table td {
-      padding: 3px 0;
-      vertical-align: top;
-      font-size: 9pt;
+    .skill-cat-box {
+      font-size: 8.8pt;
     }
-    .skill-cat {
+    .skill-cat-title {
       font-weight: 700;
       color: #0f172a;
-      width: 175px;
+      margin-bottom: 2px;
     }
-    .skill-vals {
+    .skill-tags-list {
       color: #334155;
     }
 
@@ -117,8 +117,8 @@
       font-weight: 700;
       color: #0f172a;
     }
-    .item-subtitle {
-      font-size: 9pt;
+    .item-tech {
+      font-size: 8.5pt;
       font-weight: 600;
       color: #0284c7;
     }
@@ -127,8 +127,14 @@
       font-weight: 600;
       color: #64748b;
     }
+    .item-subtitle {
+      font-size: 8.8pt;
+      font-weight: 600;
+      color: #0284c7;
+      margin-bottom: 2px;
+    }
     .item-desc {
-      font-size: 9pt;
+      font-size: 8.8pt;
       color: #334155;
       margin-bottom: 3px;
     }
@@ -137,12 +143,12 @@
       margin-top: 2px;
     }
     ul.item-bullets li {
-      font-size: 8.8pt;
+      font-size: 8.6pt;
       color: #334155;
       margin-bottom: 2px;
     }
 
-    /* Two Column Grid for Bottom */
+    /* Two Column Layout */
     .two-col {
       display: flex;
       gap: 20px;
@@ -157,13 +163,14 @@
     <!-- Header -->
     <header class="header">
       <h1 class="name">Satyam Maurya</h1>
-      <div class="title-sub">AI App Developer | Full Stack Developer</div>
+      <div class="title-sub">AI App Developer | Flutter Developer | Frontend Web Developer | Graphic Designer | Power BI Enthusiast</div>
       <div class="contact-info">
-        <span>📍 India</span>
         <span>✉️ <a href="mailto:aaryasam94@gmail.com">aaryasam94@gmail.com</a></span>
         <span>🌐 <a href="https://satyam-ai18.github.io">satyam-ai18.github.io</a></span>
         <span>💻 <a href="https://github.com/satyam-ai18">github.com/satyam-ai18</a></span>
         <span>🔗 <a href="https://linkedin.com/in/satyam-maurya-77a269367">LinkedIn Profile</a></span>
+        <span>📷 <a href="https://instagram.com/satyam_maurya0411">Instagram</a></span>
+        <span>📍 India</span>
       </div>
     </header>
 
@@ -171,82 +178,85 @@
     <section class="section">
       <h2 class="section-title">Professional Summary</h2>
       <p class="summary-text">
-        Innovative and detail-oriented AI App Developer and Full Stack Developer with a strong foundation in artificial intelligence, machine learning, and modern web technologies. Skilled in designing, developing, and deploying intelligent applications that integrate AI models with scalable full-stack architectures. Passionate about building impactful digital solutions through continuous learning, experimentation, and problem-solving.
+        Innovative and detail-oriented AI App Developer and Flutter Developer with hands-on experience in building modern, responsive, and user-friendly mobile and web applications. Skilled in Flutter, Dart, HTML, CSS, JavaScript, and Power BI, with a strong focus on UI/UX design and performance optimization. Passionate about developing scalable digital solutions that combine creativity and technology. Continuously learning emerging tools in AI, data visualization, and full-stack development to deliver impactful software solutions.
       </p>
     </section>
 
     <!-- Technical Skills -->
     <section class="section">
       <h2 class="section-title">Technical Skills</h2>
-      <table class="skills-table">
-        <tr>
-          <td class="skill-cat">Programming Languages:</td>
-          <td class="skill-vals">Python, JavaScript, TypeScript, C++, Java, Dart</td>
-        </tr>
-        <tr>
-          <td class="skill-cat">Frontend Development:</td>
-          <td class="skill-vals">React.js, Next.js, HTML5, CSS3, Tailwind CSS, Redux, Three.js</td>
-        </tr>
-        <tr>
-          <td class="skill-cat">Backend & APIs:</td>
-          <td class="skill-vals">Node.js, Express.js, Django, Flask, RESTful APIs, WebSockets</td>
-        </tr>
-        <tr>
-          <td class="skill-cat">Databases:</td>
-          <td class="skill-vals">MongoDB, MySQL, PostgreSQL, Firebase Realtime Database</td>
-        </tr>
-        <tr>
-          <td class="skill-cat">AI, ML & Data Tools:</td>
-          <td class="skill-vals">TensorFlow, PyTorch, OpenAI API, Gemini API, LangChain, Hugging Face, Scikit-learn, Pandas, NumPy, Power BI</td>
-        </tr>
-        <tr>
-          <td class="skill-cat">DevOps & Cloud:</td>
-          <td class="skill-vals">Git, GitHub, Docker, Vercel, Netlify, GitHub Pages</td>
-        </tr>
-        <tr>
-          <td class="skill-cat">Design & Developer Tools:</td>
-          <td class="skill-vals">VS Code, Postman, Figma, Canva, Power BI Desktop</td>
-        </tr>
-      </table>
+      <div class="skills-grid">
+        <div class="skill-cat-box">
+          <div class="skill-cat-title">Programming & Development:</div>
+          <div class="skill-tags-list">Flutter, Dart, HTML5, CSS3, JavaScript</div>
+        </div>
+        <div class="skill-cat-box">
+          <div class="skill-cat-title">AI & Productivity:</div>
+          <div class="skill-tags-list">AI Application Development, Prompt Engineering, AI-Assisted Development</div>
+        </div>
+        <div class="skill-cat-box">
+          <div class="skill-cat-title">Web Development:</div>
+          <div class="skill-tags-list">Responsive Web Design, Frontend Development, GitHub Pages Deployment</div>
+        </div>
+        <div class="skill-cat-box">
+          <div class="skill-cat-title">Data & Analytics:</div>
+          <div class="skill-tags-list">Power BI, Data Visualization, Dashboard Development</div>
+        </div>
+        <div class="skill-cat-box">
+          <div class="skill-cat-title">Graphic Design:</div>
+          <div class="skill-tags-list">UI/UX Design, Canva, Figma (Basic), Adobe Photoshop (Basic)</div>
+        </div>
+        <div class="skill-cat-box">
+          <div class="skill-cat-title">Tools & Platforms:</div>
+          <div class="skill-tags-list">Git, GitHub, VS Code, Android Studio</div>
+        </div>
+      </div>
     </section>
 
     <!-- Projects -->
     <section class="section">
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title">Projects</h2>
 
       <div class="item">
         <div class="item-header">
-          <span class="item-title">AI Tech Portfolio Website</span>
-          <span class="item-date">2026</span>
+          <span class="item-title">Image Compressor App</span>
+          <span class="item-tech">Tech Stack: Flutter, Dart</span>
         </div>
-        <div class="item-desc">A futuristic 3D Marvel Stark Industrial & JARVIS HUD inspired web portfolio showcasing AI & Full-Stack engineering capabilities.</div>
         <ul class="item-bullets">
-          <li>Built with HTML5, CSS3, Vanilla JavaScript, and Three.js 3D WebGL particle engine with zero heavy frameworks.</li>
-          <li>Integrated JARVIS audio spectrum effects, 3D tilt interactions, and GitHub telemetry API integration.</li>
+          <li>Developed a modern Flutter application for image compression with optimized quality & speed.</li>
+          <li>Designed a user-friendly interface with production-ready responsive architecture.</li>
         </ul>
       </div>
 
       <div class="item">
         <div class="item-header">
-          <span class="item-title">AI Chat & Conversational Application</span>
-          <span class="item-date">2025</span>
+          <span class="item-title">PDF Utility Suite</span>
+          <span class="item-tech">Tech Stack: Flutter, Dart</span>
         </div>
-        <div class="item-desc">An intelligent chat platform powered by natural language processing and generative AI models.</div>
         <ul class="item-bullets">
-          <li>Developed using React.js, Node.js, Express.js, and Socket.io for real-time bi-directional messaging.</li>
-          <li>Integrated GPT/Gemini AI APIs for dynamic responses, prompt memory, and streaming code generation.</li>
+          <li>Created a suite of tools for PDF conversion, compression, merging, and splitting.</li>
+          <li>Focused on clean UI, efficient document processing, and smooth user experience.</li>
         </ul>
       </div>
 
       <div class="item">
         <div class="item-header">
-          <span class="item-title">VisionAI Scanner & Intelligence App</span>
-          <span class="item-date">2025</span>
+          <span class="item-title">Developer Portfolio Website</span>
+          <span class="item-tech">Tech Stack: HTML, CSS, JavaScript</span>
         </div>
-        <div class="item-desc">Cross-platform mobile application performing computer vision tasks and text extraction.</div>
         <ul class="item-bullets">
-          <li>Engineered with Flutter & Dart for 60fps performance on Android & iOS devices.</li>
-          <li>Integrated OpenAI Vision API for real-time image recognition, object detection, and caption synthesis.</li>
+          <li>Designed and developed a responsive personal portfolio website with 3D graphics & animations.</li>
+          <li>Showcases projects, skills, and contact information; deployed seamlessly on GitHub Pages.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-header">
+          <span class="item-title">Power BI Business Dashboards</span>
+          <span class="item-tech">Tools: Power BI</span>
+        </div>
+        <ul class="item-bullets">
+          <li>Built interactive dashboards for business reporting, data analysis, and decision-making insights.</li>
         </ul>
       </div>
     </section>
@@ -258,14 +268,14 @@
           <h2 class="section-title">Experience</h2>
           <div class="item">
             <div class="item-header">
-              <span class="item-title">AI & Full Stack Developer</span>
+              <span class="item-title">Freelance Developer / Projects</span>
               <span class="item-date">2021 – Present</span>
             </div>
-            <div class="item-subtitle">Independent Projects | Remote</div>
             <ul class="item-bullets">
-              <li>Designed & deployed AI-driven web and mobile applications from concept to production.</li>
-              <li>Implemented ML models and custom API integrations for real-world automation tasks.</li>
-              <li>Contributed to open-source software and maintained active GitHub repositories.</li>
+              <li>Designed and developed Flutter applications with modern UI/UX principles.</li>
+              <li>Built responsive frontend websites and deployed them using GitHub Pages.</li>
+              <li>Created Power BI dashboards for data analysis and visualization.</li>
+              <li>Designed digital assets using Canva and Figma; managed projects via Git & GitHub.</li>
             </ul>
           </div>
         </section>
@@ -279,37 +289,33 @@
               <span class="item-title">Bachelor of Computer Applications (BCA)</span>
               <span class="item-date">2024 – 2027</span>
             </div>
-            <div class="item-subtitle">Computer Applications & Software Dev</div>
-            <div class="item-desc">Specializing in AI Systems, Mobile Architectures, and Database Systems.</div>
+            <div class="item-subtitle">JNM College for Advance Studies & Technology</div>
+            <div class="item-desc">Mahatma Gandhi Kashi Vidyapeeth</div>
           </div>
-          <div class="item">
-            <div class="item-header">
-              <span class="item-title">Higher Secondary Education (12th)</span>
-              <span class="item-date">2022 – 2024</span>
-            </div>
-            <div class="item-subtitle">Physics, Chemistry & Mathematics (PCM)</div>
-          </div>
+        </section>
+
+        <section class="section" style="margin-top: 6px;">
+          <h2 class="section-title">Career Objective</h2>
+          <p class="summary-text" style="font-size: 8.5pt;">
+            To obtain a challenging Software Developer role where technical expertise in Flutter, AI, frontend development, and data visualization can be applied to create innovative, high-quality applications.
+          </p>
         </section>
       </div>
     </div>
 
-    <!-- Soft Skills & Achievements -->
+    <!-- Strengths & Languages -->
     <div class="two-col" style="margin-top: 4px;">
       <div class="col">
         <section class="section">
-          <h2 class="section-title">Key Achievements</h2>
-          <ul class="item-bullets">
-            <li>Independently built and deployed multiple production-ready AI applications.</li>
-            <li>Maintained a continuous open-source contribution record on GitHub (@satyam-ai18).</li>
-            <li>Recognized for innovative UI/UX design and fast full-stack prototyping.</li>
-          </ul>
+          <h2 class="section-title">Strengths</h2>
+          <div class="item-desc">Problem Solving, Fast Learner, Team Collaboration, Time Management, Creative Thinking, Communication Skills, UI/UX Design, Attention to Detail.</div>
         </section>
       </div>
       <div class="col">
         <section class="section">
-          <h2 class="section-title">Soft Skills & Languages</h2>
-          <div class="item-desc"><strong>Soft Skills:</strong> Analytical Thinking, Problem Solving, Creativity & Innovation, Time Management, Collaboration, Adaptability.</div>
-          <div class="item-desc"><strong>Languages:</strong> English (Fluent), Hindi (Native).</div>
+          <h2 class="section-title">Languages & Certifications</h2>
+          <div class="item-desc"><strong>Languages:</strong> Hindi, English</div>
+          <div class="item-desc"><strong>Certifications:</strong> Flutter Development, Power BI, Web Development, AI & Prompt Engineering</div>
         </section>
       </div>
     </div>
