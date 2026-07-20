@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Satyam Maurya - Curriculum Vitae</title>
   <style>
     @page {
@@ -13,17 +14,24 @@
       margin: 0;
       padding: 0;
     }
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #1e293b;
       background: #ffffff;
       line-height: 1.45;
       font-size: 9.8pt;
+      padding: 10px;
     }
     .resume-container {
       max-width: 800px;
+      width: 100%;
       margin: 0 auto;
-      padding: 0;
+      padding: 10px;
+      box-sizing: border-box;
     }
     /* Header */
     .header {
@@ -49,11 +57,12 @@
       color: #475569;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 8px 12px;
     }
     .contact-info span {
       display: inline-flex;
       align-items: center;
+      word-break: break-word;
     }
     .contact-info a {
       color: #0284c7;
@@ -111,6 +120,8 @@
       justify-content: space-between;
       align-items: baseline;
       margin-bottom: 2px;
+      flex-wrap: wrap;
+      gap: 4px;
     }
     .item-title {
       font-size: 10pt;
@@ -155,6 +166,42 @@
     }
     .col {
       flex: 1;
+    }
+
+    /* Mobile Responsive Styles */
+    @media screen and (max-width: 650px) {
+      body {
+        padding: 5px;
+      }
+      .resume-container {
+        padding: 8px 10px;
+      }
+      .name {
+        font-size: 18pt;
+      }
+      .title-sub {
+        font-size: 9.5pt;
+      }
+      .contact-info {
+        font-size: 8pt;
+        gap: 6px;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .two-col {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+      .summary-text {
+        text-align: left;
+      }
     }
   </style>
 </head>
