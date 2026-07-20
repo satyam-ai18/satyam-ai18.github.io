@@ -256,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tiltCards = document.querySelectorAll('.tilt-card');
   tiltCards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
+      if (window.innerWidth <= 768) return;
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -270,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     card.addEventListener('mouseleave', () => {
+      if (window.innerWidth <= 768) return;
       card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     });
   });
@@ -325,14 +327,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinksWrapper = document.querySelector('.nav-links-wrapper');
 
   if (mobileToggle && navLinksWrapper) {
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileToggle.classList.toggle('open');
       navLinksWrapper.classList.toggle('open');
     });
 
     document.querySelectorAll('.nav-link').forEach((link) => {
       link.addEventListener('click', () => {
+        mobileToggle.classList.remove('open');
         navLinksWrapper.classList.remove('open');
       });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navLinksWrapper.contains(e.target) && !mobileToggle.contains(e.target)) {
+        mobileToggle.classList.remove('open');
+        navLinksWrapper.classList.remove('open');
+      }
     });
   }
 
