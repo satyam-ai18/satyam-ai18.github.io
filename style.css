@@ -2032,6 +2032,7 @@ body.cursor-hover .cursor-outline {
 
   .nav-container {
     padding: 0 1rem;
+    width: 100%;
   }
 
   .nav-logo {
@@ -2118,11 +2119,14 @@ body.cursor-hover .cursor-outline {
 
   /* Container & Section Padding */
   .section {
-    padding: 3rem 0;
+    padding: 2.5rem 0;
   }
 
   .container {
-    padding: 0 1.2rem;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   /* Section Header */
@@ -2136,21 +2140,22 @@ body.cursor-hover .cursor-outline {
 
   /* Hero Section Mobile */
   .hero-section {
-    padding-top: calc(70px + 1.5rem);
+    padding-top: calc(70px + 1.2rem);
     padding-bottom: 2rem;
   }
 
   .hero-title {
-    font-size: 2.5rem;
-    line-height: 1.25;
+    font-size: 2.3rem;
+    line-height: 1.2;
+    word-break: break-word;
   }
 
   .hero-title .greeting {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .hero-typing {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     min-height: 2.5rem;
   }
 
@@ -2162,9 +2167,10 @@ body.cursor-hover .cursor-outline {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    padding: 0.8rem 0.5rem;
+    gap: 0.4rem;
+    padding: 0.8rem 0.4rem;
     text-align: center;
+    box-sizing: border-box;
   }
 
   .stat-item {
@@ -2174,60 +2180,71 @@ body.cursor-hover .cursor-outline {
   }
 
   .stat-number {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 
   .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     margin-left: 0;
+    line-height: 1.2;
   }
 
   .stat-divider {
     display: none;
   }
 
+  .hero-cta-group {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
   .hero-avatar-wrapper {
     margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
   }
 
   .hologram-avatar-card {
+    width: 230px;
+    height: 230px;
+  }
+
+  .holo-ring.outer {
     width: 250px;
     height: 250px;
   }
 
-  .holo-ring.outer {
-    width: 270px;
-    height: 270px;
-  }
-
   .holo-ring.inner {
-    width: 255px;
-    height: 255px;
+    width: 238px;
+    height: 238px;
   }
 
   .avatar-image-container {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
   }
 
   .avatar-floating-badge {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.75rem;
+    font-size: 0.72rem;
+    padding: 0.3rem 0.65rem;
   }
 
   .badge-top {
-    right: -5px;
+    right: 0px;
     top: 5px;
   }
 
   .badge-bottom {
-    left: -5px;
+    left: 0px;
     bottom: 5px;
   }
 
   /* About Me Section */
   .glass-card {
-    padding: 1.4rem;
+    padding: 1.2rem;
   }
 
   .about-highlights {
@@ -2238,14 +2255,41 @@ body.cursor-hover .cursor-outline {
     padding: 0.8rem;
   }
 
+  .spec-card {
+    padding: 1rem;
+  }
+
+  .spec-value {
+    font-size: 0.95rem;
+    word-break: break-all;
+  }
+
+  .cv-card-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .cv-card-actions {
+    width: 100%;
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .cv-card-actions .btn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+
   /* Skills & Services Grid */
   .skills-grid, .services-grid, .projects-grid, .certs-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 
   .service-card {
-    padding: 1.8rem 1.4rem;
+    padding: 1.6rem 1.2rem;
   }
 
   /* Horizontal Swipeable Pill Filter Bar for Projects Matrix */
@@ -2254,10 +2298,11 @@ body.cursor-hover .cursor-outline {
     justify-content: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 0.6rem;
+    gap: 0.5rem;
     padding-bottom: 0.8rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    width: 100%;
   }
 
   .project-filters::-webkit-scrollbar {
@@ -2266,30 +2311,38 @@ body.cursor-hover .cursor-outline {
 
   .filter-btn {
     flex-shrink: 0;
-    padding: 0.5rem 1.1rem;
-    font-size: 0.82rem;
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
     white-space: nowrap;
   }
 
   /* Timeline Mobile Layout */
   .timeline-dual-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .timeline-container {
-    padding-left: 1.5rem;
+    padding-left: 1.2rem;
   }
 
   .timeline-dot {
-    left: -2.1rem;
-    width: 14px;
-    height: 14px;
+    left: -1.75rem;
+    width: 12px;
+    height: 12px;
+  }
+
+  .timeline-item {
+    padding: 1.1rem;
+  }
+
+  .timeline-org {
+    word-break: break-word;
   }
 
   /* GitHub Stats Widgets */
   .widget-native-stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.6rem;
   }
 
@@ -2301,50 +2354,93 @@ body.cursor-hover .cursor-outline {
 
   /* Contact Wrapper */
   .contact-wrapper {
-    padding: 1.5rem;
-    gap: 2rem;
+    padding: 1.2rem;
+    gap: 1.8rem;
+  }
+
+  .info-link-item {
+    padding: 0.85rem 1rem;
+    overflow: hidden;
+  }
+
+  .info-content {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .info-value {
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .form-group input, .form-group textarea {
     font-size: 16px; /* Prevents auto zoom on mobile iOS focus */
+    width: 100%;
   }
 
   /* Fixed HUD Elements Scaling on Mobile */
   .hud-corner {
-    width: 16px;
-    height: 16px;
-    opacity: 0.35;
+    width: 14px;
+    height: 14px;
+    opacity: 0.3;
   }
 
-  .hud-corner.top-left { top: 8px; left: 8px; }
-  .hud-corner.top-right { top: 8px; right: 8px; }
-  .hud-corner.bottom-left { bottom: 8px; left: 8px; }
-  .hud-corner.bottom-right { bottom: 8px; right: 8px; }
+  .hud-corner.top-left { top: 6px; left: 6px; }
+  .hud-corner.top-right { top: 6px; right: 6px; }
+  .hud-corner.bottom-left { bottom: 6px; left: 6px; }
+  .hud-corner.bottom-right { bottom: 6px; right: 6px; }
 
   .jarvis-audio-spectrum {
-    bottom: 15px;
-    right: 15px;
+    bottom: 12px;
+    right: 12px;
     opacity: 0.6;
-    transform: scale(0.85);
+    transform: scale(0.75);
     transform-origin: bottom right;
   }
 
   .back-to-top-btn {
-    bottom: 20px;
-    right: 20px;
+    bottom: 75px;
+    right: 15px;
     width: 42px;
     height: 42px;
     font-size: 1.1rem;
+  }
+
+  /* Sci-Fi HUD CV Modal Overlay on Mobile */
+  .cv-modal-overlay {
+    padding: 0.8rem;
+  }
+
+  .cv-modal-container {
+    width: 96vw;
+    height: 85vh;
+    max-height: 85vh;
+  }
+
+  .cv-modal-header {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .cv-modal-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 2.1rem;
+    font-size: 1.95rem;
+  }
+
+  .hero-title .greeting {
+    font-size: 1.1rem;
   }
 
   .hero-typing {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    min-height: 2.8rem;
   }
 
   .hero-cta-group {
@@ -2355,10 +2451,97 @@ body.cursor-hover .cursor-outline {
 
   .hero-cta-group .btn {
     width: 100%;
+    justify-content: center;
   }
 
-  .widget-native-stats {
-    grid-template-columns: 1fr;
+  .hologram-avatar-card {
+    width: 200px;
+    height: 200px;
+  }
+
+  .holo-ring.outer {
+    width: 216px;
+    height: 216px;
+  }
+
+  .holo-ring.inner {
+    width: 206px;
+    height: 206px;
+  }
+
+  .avatar-image-container {
+    width: 175px;
+    height: 175px;
+  }
+
+  .avatar-floating-badge {
+    font-size: 0.68rem;
+    padding: 0.3rem 0.55rem;
+  }
+
+  .badge-top {
+    right: 0px;
+    top: 0px;
+  }
+
+  .badge-bottom {
+    left: 0px;
+    bottom: 0px;
+  }
+
+  .cert-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .hud-cv-nav-btn {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.72rem;
+  }
+
+  .hud-cv-nav-btn span {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-stats-strip {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0.5rem 0.2rem;
+    gap: 0.15rem;
+  }
+
+  .stat-number {
+    font-size: 1.15rem;
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+  }
+
+  .hologram-avatar-card {
+    width: 180px;
+    height: 180px;
+  }
+
+  .holo-ring.outer {
+    width: 194px;
+    height: 194px;
+  }
+
+  .holo-ring.inner {
+    width: 186px;
+    height: 186px;
+  }
+
+  .avatar-image-container {
+    width: 155px;
+    height: 155px;
   }
 }
 
