@@ -1,10 +1,10 @@
-# Satyam Maurya | 3D Marvel Tech Developer Portfolio 🚀
+# Satyam Maurya | Professional Developer Portfolio 🚀
 
-![Portfolio Banner](assets/images/avatar.svg)
+![Portfolio Preview](assets/images/satyam-photo.jpg)
 
-A world-class, futuristic, dark-mode 3D Marvel Stark Industrial & JARVIS HUD inspired portfolio website built for **Satyam Maurya**.
+A world-class, modern, dark-theme developer portfolio website built for **Satyam Maurya** — AI App Developer, Flutter Mobile Engineer, Full-Stack Web Developer, UI/UX Designer, and Power BI Specialist.
 
-Designed with pure **HTML5**, **CSS3**, and **Vanilla JavaScript** (enhanced with Three.js 3D graphics), this website is 100% framework-free, highly optimized, responsive, and ready for instant deployment on **GitHub Pages**.
+Designed with pure **HTML5**, **CSS3 (Custom Properties & Glassmorphism)**, and **Vanilla JavaScript** (with lightweight Three.js ambient graphics), this website is 100% framework-free, highly performant, fully responsive, and ready for instant deployment on **GitHub Pages**.
 
 ---
 
@@ -12,11 +12,11 @@ Designed with pure **HTML5**, **CSS3**, and **Vanilla JavaScript** (enhanced wit
 
 - **Name**: Satyam Maurya
 - **Roles**:
-  - 🤖 AI App Developer
-  - 📱 Flutter Developer
-  - 💻 Frontend Web Developer
-  - 🎨 Graphic Designer
-  - 📊 Power BI Enthusiast
+  - 🤖 AI Application Developer
+  - 📱 Flutter Mobile Engineer
+  - 💻 Full-Stack Web Developer
+  - 🎨 UI/UX & Graphic Designer
+  - 📊 Power BI Data Specialist
 - **Portfolio URL**: [https://satyam-ai18.github.io](https://satyam-ai18.github.io)
 - **GitHub**: [https://github.com/satyam-ai18](https://github.com/satyam-ai18)
 - **LinkedIn**: [https://linkedin.com/in/satyam-maurya-77a269367](https://linkedin.com/in/satyam-maurya-77a269367)
@@ -25,62 +25,61 @@ Designed with pure **HTML5**, **CSS3**, and **Vanilla JavaScript** (enhanced wit
 
 ---
 
-## 🔥 Key Design & Technical Features
+## 🔥 Key Design & Engineering Features
 
-1. **Stark Tech Marvel Aesthetic**:
-   - Deep space dark background (`#04060a`, `#0d111d`) with neon cyan (`#00f0ff`), arc reactor crimson (`#ff0055`), and Stark gold (`#ffb700`) accents.
-   - Dark glassmorphism (`backdrop-filter: blur(16px)`), Marvel HUD corner brackets, and scanner light bars.
+1. **Modern Premium Design System**:
+   - Deep dark aesthetic with refined indigo-to-cyan accents (`#6366f1` / `#38bdf8`), subtle border highlights, and soft multi-layered shadows.
+   - Clean typography using Google Fonts (`Plus Jakarta Sans`, `Inter`, `Fira Code`).
 
-2. **3D Three.js Background Particle Engine**:
-   - Interactive 3D particle universe mesh that dynamically rotates and reacts to cursor coordinates in real-time.
+2. **Subtle 3D Ambient Particle Mesh**:
+   - Lightweight Three.js constellation background with mouse parallax interaction and smooth scroll physics.
 
-3. **JARVIS Loader Sequence**:
-   - Sci-fi loading screen featuring an Arc Reactor spinner animation, progress bar, and percentage counter.
+3. **Custom Smooth Cursor**:
+   - Hardware-accelerated cursor dot and trailing circle with hover scaling on buttons and cards.
 
-4. **Custom 3D Cursor**:
-   - Hardware-accelerated cursor dot and trailing glow halo with hover scaling on buttons and cards.
+4. **Dynamic Typing Rotation**:
+   - Typewriter animation highlighting Satyam's key engineering disciplines.
 
-5. **Dynamic Multi-Role Typing Engine**:
-   - Smooth typewriter effect cycling through Satyam's developer titles.
+5. **Interactive Project Filter Matrix**:
+   - Instant project filtering across categories: `All Projects`, `AI Projects`, `Flutter Apps`, `Web & UI`, and `Power BI & Data`.
 
-6. **Vanilla 3D Card Tilt Interaction**:
-   - Perspective 3D rotation math on mouse movement with light reflection effects on cards.
+6. **Flagship Project Spotlight**:
+   - Featured 2-column showcase highlighting the AI App Development Suite.
 
-7. **Filterable Projects Matrix**:
-   - Instant project filtering across categories: `All Projects`, `AI Projects`, `Flutter Apps`, `Web Projects`, and `Power BI Dashboards`.
+7. **Clean Experience & Education Timeline**:
+   - Dual-column scannable timeline detailing freelance milestones and BCA studies at JNM College (MGKVP).
 
-8. **Live GitHub Telemetry & Stats**:
-   - Displays real-time GitHub stats, coding streak, contribution activity, and top language badges for `@satyam-ai18`.
+8. **Developer Metrics & Stats**:
+   - Public repositories, commit milestones, coding streak, and technology distribution breakdown.
 
-9. **Holographic Contact Terminal**:
-   - Form with input glow feedback, direct mail copy button, and interactive alert notifications.
+9. **Interactive Contact Gateway**:
+   - One-click copy email button and Formspree contact form with instant validation and feedback.
 
-10. **Sci-Fi Ambience Sound Synthesizer**:
-    - Optional ambient tone toggle built using the native Web Audio API.
+10. **Responsive & Accessible**:
+    - Seamlessly tested across desktop, tablet, and mobile (320px, 375px, 425px, 768px, 1024px, 1440px+).
 
 ---
 
-## 🛠️ Tech Stack & Requirements
+## 🛠️ Tech Stack
 
-- **HTML5**: Semantic tags, accessibility attributes, OpenGraph metadata.
-- **CSS3**: CSS Custom Properties (Variables), Flexbox, CSS Grid, Glassmorphism, 3D Transforms, CSS Keyframe Animations.
-- **Vanilla JavaScript (ES6+)**: Three.js integration, IntersectionObserver, Web Audio API, Clipboard API.
-- **Zero Heavy Frameworks**: No React, Vue, Angular, Bootstrap, Tailwind, or jQuery.
+- **HTML5**: Semantic tags, OpenGraph SEO metadata, accessibility attributes.
+- **CSS3**: Custom Properties, Flexbox, CSS Grid, Glassmorphism, Responsive Media Queries.
+- **Vanilla JavaScript (ES6+)**: Three.js, IntersectionObserver, Clipboard API, Formspree API.
+- **Dependencies**: Zero heavy frontend frameworks (pure static website).
 
 ---
 
 ## 📁 File Structure
 
 ```text
-c:/Users/aarya/OneDrive/Desktop/Port/
-├── index.html            # Main semantic HTML5 markup with Marvel HUD sections
-├── style.css             # Design system, glassmorphic UI, responsive layout
-├── script.js             # Three.js 3D universe, cursor tracking, typing effect, card tilt
+satyam-ai18.github.io/
+├── index.html            # Main semantic HTML5 markup
+├── style.css             # Design tokens, layout, typography, components
+├── script.js             # Ambient Three.js, cursor, typewriter, filtering, observers
 ├── assets/
-│   ├── images/
-│   │   └── avatar.svg    # Stark HUD holographic developer illustration
-│   └── icons/
-│       └── arc-reactor.svg # Arc Reactor SVG logo asset
+│   ├── images/           # High-resolution project previews & developer portrait
+│   ├── icons/            # SVG icons & branding
+│   └── Satyam_Maurya_Resume.pdf # Official Curriculum Vitae
 └── README.md             # Project documentation & deployment guide
 ```
 
@@ -88,7 +87,7 @@ c:/Users/aarya/OneDrive/Desktop/Port/
 
 ## 🚀 How to Run Locally
 
-1. Clone or download this repository to your local computer:
+1. Clone or download this repository:
    ```bash
    git clone https://github.com/satyam-ai18/satyam-ai18.github.io.git
    ```
@@ -96,31 +95,14 @@ c:/Users/aarya/OneDrive/Desktop/Port/
    ```bash
    cd satyam-ai18.github.io
    ```
-3. Open `index.html` directly in any web browser (or use VS Code Live Server extension).
-
----
-
-## 🌐 How to Deploy to GitHub Pages
-
-1. Create a new repository on GitHub named **`satyam-ai18.github.io`** (or push to an existing repository).
-2. Initialize git and commit your files:
+3. Open `index.html` directly in any modern web browser or start a local server:
    ```bash
-   git init
-   git add .
-   git commit -m "Deploy 3D Marvel Tech Portfolio Website"
-   git branch -M main
-   git remote add origin https://github.com/satyam-ai18/satyam-ai18.github.io.git
-   git push -u origin main
+   python -m http.server 8000
    ```
-3. Go to your repository settings on GitHub:
-   - Click **Settings** > **Pages**.
-   - Under **Build and deployment** > **Branch**, select `main` branch and `/ (root)` folder.
-   - Click **Save**.
-4. Your world-class portfolio will be live at: **[https://satyam-ai18.github.io](https://satyam-ai18.github.io)** 🎉
+4. Visit `http://localhost:8000` in your browser.
 
 ---
 
-## 📝 License & Credits
+## 📄 License
 
-Designed & Engineered with ❤️ for **Satyam Maurya**.  
-© 2026 Satyam Maurya. Built with Stark Tech 3D Marvel Edition aesthetics.
+© 2026 **Satyam Maurya**. All rights reserved.
